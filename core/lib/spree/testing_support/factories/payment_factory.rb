@@ -6,6 +6,7 @@ FactoryGirl.define do
     order
     state 'checkout'
     response_code '12345'
+    document_number '81336138840'
   end
 
   factory :check_payment, class: Spree::Payment do

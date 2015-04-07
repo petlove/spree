@@ -360,7 +360,16 @@ module Spree
 
     # Helper methods for checkout steps
     def paid?
-      payment_state == 'paid' || payment_state == 'credit_owed'
+      payment_state == 'paid' || payment_state == 'credit_owed' || paid_with_card?
+    end
+
+    def paid_with_card?
+      payment? && payments.first.credit_card? && payments.first.pending?
+    end
+
+
+    def document_number
+      payments.first.try(:document_number)
     end
 
     def available_payment_methods

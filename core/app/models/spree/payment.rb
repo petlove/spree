@@ -157,6 +157,10 @@ module Spree
       amount - capture_events.sum(:amount)
     end
 
+    def credit_card?
+      source_type == 'Spree::CreditCard'
+    end
+
     private
 
       def validate_source
@@ -222,5 +226,6 @@ module Spree
       def generate_identifier
         Array.new(8){ IDENTIFIER_CHARS.sample }.join
       end
+
   end
 end
