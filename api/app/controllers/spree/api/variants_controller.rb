@@ -34,7 +34,6 @@ module Spree
       end
 
       def show
-        scope
         @variant = scope.includes({ option_values: :option_type }, :option_values, :product, :default_price, :images, { stock_items: :stock_location })
           .find(params[:id])
         respond_with(@variant)
