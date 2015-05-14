@@ -69,6 +69,29 @@ module Spree
       return action_taken
     end
 
+    def deactivate(payload)
+      order = payload[:order]
+
+      actions.map do |action|
+        action.undo(payload)
+        # action.try(:undo, payload)
+      end
+
+      orders.delete(order)
+
+    end
+
+    def activate_or_deactivate(payload)
+      line_item = payload[:line_item] || false
+      order = payload[:order]
+      if (line_item && eligible?(line_item)) || eligible?(order)
+       activate(payload)
+      else
+        return unless orders.include? order
+        deactivate(payload)
+      end
+    end
+
     # called anytime order.update! happens
     def eligible?(promotable)
       return false if expired? || usage_limit_exceeded?(promotable)

@@ -19,6 +19,7 @@ $.fn.variantAutocomplete = ->
     ajax:
       url: Spree.url(Spree.routes.variants_api)
       datatype: "json"
+      quietMillis: 1000
       data: (term, page) ->
         q:
           product_name_or_sku_cont: term

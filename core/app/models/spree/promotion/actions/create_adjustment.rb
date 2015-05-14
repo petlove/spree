@@ -33,6 +33,12 @@ module Spree
           true
         end
 
+        def undo(payload)
+          order = payload[:order]
+          order.adjustments.where(source: self).delete_all
+
+        end
+
         # Ensure a negative amount which does not exceed the sum of the order's
         # item_total and ship_total
         def compute_amount(calculable)

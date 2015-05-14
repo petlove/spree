@@ -22,9 +22,11 @@ module Spree
 
       def activate
         promotions.each do |promotion|
-          if (line_item && promotion.eligible?(line_item)) || promotion.eligible?(order)
-            promotion.activate(line_item: line_item, order: order)
-          end
+          payload = { line_item: line_item, order: order }
+          promotion.activate_or_deactivate payload
+          # if (line_item && promotion.eligible?(line_item)) || promotion.eligible?(order)
+          #   promotion.activate(line_item: line_item, order: order)
+          # end
         end
       end
 
