@@ -21,7 +21,7 @@ module Spree
     has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Spree::Image"
 
     has_one :default_price,
-      -> { where currency: Spree::Config[:currency] },
+      -> { where currency: Spree::Config[:currency], deleted_at: nil},
       class_name: 'Spree::Price',
       dependent: :destroy,
       inverse_of: :variant
