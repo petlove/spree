@@ -7,6 +7,8 @@ module Spree
     self.table_name = 'spree_users'
 
     has_many :orders, foreign_key: :user_id
+    has_many :pets, foreign_key: :user_id, dependent: :destroy
+
 
     before_destroy :check_completed_orders
 
