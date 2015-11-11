@@ -28,6 +28,8 @@ module Spree
       belongs_to :approver
     end
 
+    serialize :invoice, JSON
+
     belongs_to :bill_address, foreign_key: :bill_address_id, class_name: 'Spree::Address'
     alias_attribute :billing_address, :bill_address
 
