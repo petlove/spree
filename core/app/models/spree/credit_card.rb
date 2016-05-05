@@ -1,6 +1,7 @@
 module Spree
   class CreditCard < Spree::Base
     belongs_to :payment_method
+    belongs_to :user, class_name: 'Spree::LegacyUser', foreign_key: :user_id
     has_many :payments, as: :source
 
     before_create :set_missing_info
