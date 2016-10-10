@@ -61,6 +61,11 @@ module Spree
       event :started_processing do
         transition from: [:checkout, :pending, :completed, :processing], to: :processing
       end
+
+      event :pend_analyzing do
+        transition from: [:checkout, :processing], to: :analyzing
+      end
+
       # When processing during checkout fails
       event :failure do
         transition from: [:pending, :processing], to: :failed
